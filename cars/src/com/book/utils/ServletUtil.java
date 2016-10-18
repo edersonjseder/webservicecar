@@ -5,6 +5,13 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * The XML responses needs to be sent to browser as a HTTP request, so this class is to write XML or JSON
+ * with the standard content type (mime-type) so the client knows how to process the data sent.
+ * 
+ * @author ederson
+ *
+ */
 public class ServletUtil {
 	
 	public static void writeXML(HttpServletResponse response, String xml) throws IOException {

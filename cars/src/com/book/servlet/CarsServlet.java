@@ -49,9 +49,7 @@ public class CarsServlet extends HttpServlet {
     		car.setId(carDAO.insert(car));
     	}
     	
-		// Turn the object into JSON 
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String stringCarJson = gson.toJson(car);
+		String stringCarJson = showResponseJSONFormatted(car);
 		
 		// Write the json on Servlet response with application/json
 		ServletUtil.writeJSON(resp, stringCarJson);
@@ -69,9 +67,7 @@ public class CarsServlet extends HttpServlet {
 			car = carDAO.getCarById(id);
 			
 			if(car != null){
-				// Turn the object into JSON 
-				Gson gson = new GsonBuilder().setPrettyPrinting().create();
-				String stringCarJson = gson.toJson(car);
+				String stringCarJson = showResponseJSONFormatted(car);
 				
 				// Write the json on Servlet response with application/json
 				ServletUtil.writeJSON(response, stringCarJson);
@@ -85,9 +81,7 @@ public class CarsServlet extends HttpServlet {
 			list = new CarsList();
 			list.setCars(carsList);
 			
-			// Turn the object into JSON 
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			String stringListCarJson = gson.toJson(list);
+			String stringListCarJson = showResponseJSONFormatted(list);
 			
 			// Write the json on Servlet response with application/json
 			ServletUtil.writeJSON(response, stringListCarJson);
@@ -105,9 +99,7 @@ public class CarsServlet extends HttpServlet {
 			carDAO.delete(id);
 			response = Response.ok("Car removed successfully");
 			
-			// Turn the object into JSON 
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			String stringListCarJson = gson.toJson(response);
+			String stringListCarJson = showResponseJSONFormatted(response);
 			
 			// Write the json on Servlet response with application/json
 			ServletUtil.writeJSON(resp, stringListCarJson);
@@ -115,9 +107,7 @@ public class CarsServlet extends HttpServlet {
 		} else {
 			response = Response.error("Invalid URL");
 			
-			// Turn the object into JSON 
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
-			String stringListCarJson = gson.toJson(response);
+			String stringListCarJson = showResponseJSONFormatted(response);
 			
 			// Write the json on Servlet response with application/json
 			ServletUtil.writeJSON(resp, stringListCarJson);
@@ -141,6 +131,15 @@ public class CarsServlet extends HttpServlet {
 		car.setType(request.getParameter("type"));
 		
 		return car;
+	}
+	
+	private String showResponseJSONFormatted(Object object){
+		
+		// Turn the object into JSON 
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String stringJson = gson.toJson(object);
+		
+		return stringJson;
 	}
 	
 }

@@ -15,15 +15,16 @@ import com.book.model.Car;
 import com.book.model.CarsList;
 import com.book.model.Response;
 
+/**
+ * This class is responsible for create XML format from Java objects
+ * 
+ * @author ederson
+ *
+ */
 public class JAXBUtil {
-	private static JAXBUtil instance;
 	private static JAXBContext context;
 	
-	@SuppressWarnings("unused")
-	private static JAXBUtil getInstance(){
-		return instance;
-	}
-	
+	// Creates the JAXB context and has all classes informed to be generated XML from them
 	static {
 		try {
 			context = JAXBContext.newInstance(CarsList.class, Car.class, Response.class);
@@ -35,6 +36,11 @@ public class JAXBUtil {
 		}
 	}
 	
+	/**
+	 * This method convert Java objects to XML format
+	 * @param object
+	 * @return
+	 */
 	public static String toXML(Object object){
 		try {
 			
